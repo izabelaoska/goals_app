@@ -16,8 +16,8 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <View>
-        <Text>Daily goals planner</Text>
+      <View style={styles.mainTitle}>
+        <Text style={styles.titleTextColor}>Daily goals planner</Text>
       </View>
       <View style={styles.inputContainer}>
         <TextInput
@@ -62,6 +62,8 @@ const styles = StyleSheet.create({
     width: '70%',
     marginRight: 10,
     padding: 16,
+    color: '#416165',
+    fontSize: 20,
   },
   goalsContainer: {
     flex: 5,
@@ -75,4 +77,6 @@ const styles = StyleSheet.create({
     color: '#416165',
     fontSize: 18,
   },
+  mainTitle: { margin: 8, marginTop: 24 },
+  titleTextColor: { color: '#eebaad', fontSize: 32 },
 });
