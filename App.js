@@ -1,20 +1,78 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
+  const [enteredGoalText, setEnteredGoalText] = useState('');
+  const [courseGoals, setCourseGoals] = useState([]);
+  function goalInputHandler(enteredGoalText) {
+    setEnteredGoalText(enteredGoalText);
+  }
+  function addGoalHandler() {
+    setCourseGoals((currentCourseGoals) => [
+      ...currentCourseGoals,
+      enteredGoalText,
+    ]);
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={styles.appContainer}>
+      <View>
+        <Text>Daily goals planner</Text>
+      </View>
+      <View style={styles.inputContainer}>
+        <TextInput
+          placeholder="Enter your goal!"
+          style={styles.textInput}
+          onChangeText={goalInputHandler}
+        />
+        <Button title="Add goal" onPress={addGoalHandler} />
+      </View>
+      <View style={styles.goalsContainer}>
+        {courseGoals.map((goal) => {
+          return (
+            <View style={styles.goalItem} key={goal}>
+              <Text style={styles.textColor}>{goal}</Text>
+            </View>
+          );
+        })}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  appContainer: {
+    paddingTop: 70,
+    paddingHorizontal: 16,
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0b3948',
+  },
+  inputContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    justifyContent: 'center',
+    margin: 8,
+    marginBottom: 24,
+    borderBottomWidth: 2,
+    borderBottomColor: '#d0cdd7',
+  },
+  textInput: {
+    backgroundColor: '#acb0bd',
+    width: '70%',
+    marginRight: 10,
+    padding: 16,
+  },
+  goalsContainer: {
+    flex: 5,
+  },
+  goalItem: {
+    margin: 8,
+    backgroundColor: '#acb0bd',
+    padding: 14,
+  },
+  textColor: {
+    color: '#416165',
+    fontSize: 18,
   },
 });
